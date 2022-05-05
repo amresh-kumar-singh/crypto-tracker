@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom'
 import { CryptoState } from '../CryptoContext';
 import { Brightness4Rounded } from '@mui/icons-material';
 import { Brightness7Rounded } from '@mui/icons-material';
+import AuthModal from './Authentication/AuthModal';
+import UserSideBar from './Authentication/UserSideBar';
 
 const titleStyle = {
     flex: 1,
@@ -20,9 +22,9 @@ const darkTheme = createTheme({
 const Header = ({setMode}) => {
     const theme = useTheme()
     const navigate = useNavigate()
-    const {currency, symbol, setCurrency} = CryptoState()
-    console.log(theme.palette.mode)
-
+    const {currency, symbol, setCurrency, user} = CryptoState()
+    // console.log(theme.palette.mode)
+    // console.log(user)
     const handleModeChange = () => {
         setMode(prevMode => prevMode==="dark" ? "light" : "dark")
     }
@@ -44,6 +46,7 @@ const Header = ({setMode}) => {
                         <IconButton sx={{ml:1}} onClick= {handleModeChange}>
                             {theme.palette.mode === "dark" ? <Brightness7Rounded /> : <Brightness4Rounded />}
                         </IconButton>
+                        { user ? <UserSideBar /> :<AuthModal />}
                     </Toolbar>
                 </Container>
             </AppBar>

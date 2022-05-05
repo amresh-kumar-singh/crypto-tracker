@@ -1,33 +1,16 @@
-import React, { useMemo, useState } from 'react'
-import { Container, createTheme, LinearProgress, Pagination, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, ThemeProvider, Typography } from '@mui/material'
-import axios from 'axios'
-import { CoinList } from '../config/api'
+import React, { useState } from 'react'
+import { Container, createTheme, LinearProgress, Pagination, Paper, Table, TableBody, TableContainer, TableHead, TableRow, TextField,  Typography } from '@mui/material'
 import { CryptoState } from '../CryptoContext'
 import {  useNavigate } from 'react-router-dom'
 import { StyledTableCell, StyledTableRow } from './StyledTable'
 
-const darkTheme = createTheme({
-    palette: {
-      mode: 'dark',
-    },
-  });
+
 
 const CoinsTable = () => {
-    const [coins, setCoins] = useState([])
-    const [loading, setLoading] = useState(false)
     const [search, setSearch] = useState("")
     const [page, setPage] = useState(1)
-    const {currency,symbol, local} = CryptoState()
+    const {currency,symbol, local, coins,loading} = CryptoState() //we can receive fetch coin here but no need
     const navigate = useNavigate()
-
-    const fetchCoinsMemo = useMemo( async () => {
-        setLoading(true)
-        const {data} = await axios.get(CoinList(currency))
-        setCoins(data)
-        setLoading(false)
-        // console.log("data :", data)
-    },[currency])
-    // fetchCoinsMemo() will return data
 
     const handleSearch = () => {
         return coins.filter(coin => coin?.name.toLowerCase().includes(search) || coin?.symbol.toLowerCase().includes(search))

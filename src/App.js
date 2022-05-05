@@ -6,6 +6,7 @@ import CoinPage from './Pages/CoinPage';
 import HomePage from './Pages/HomePage';
 import {useMemo, useState} from 'react'
 import { amber, deepOrange, green, grey } from '@mui/material/colors';
+import Alert from './Components/Alert';
 
 const appStyle ={
     // backgroundColor: "inherit",
@@ -62,6 +63,7 @@ function App() {
                 <Route path="/coins/:id" element = {<CoinPage />} />
               </Routes>
             </Paper>
+            <Alert />
           </ThemeProvider>
         </Router>
   );

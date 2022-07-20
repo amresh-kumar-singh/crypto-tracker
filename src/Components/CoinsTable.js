@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Container, createTheme, LinearProgress, Pagination, Paper, Table, TableBody, TableContainer, TableHead, TableRow, TextField,  Typography } from '@mui/material'
+import { Container,  LinearProgress, Pagination, Paper, Table, TableBody, TableContainer, TableHead, TableRow, TextField,  Typography } from '@mui/material'
 import { CryptoState } from '../CryptoContext'
 import {  useNavigate } from 'react-router-dom'
 import { StyledTableCell, StyledTableRow } from './StyledTable'
@@ -9,7 +9,7 @@ import { StyledTableCell, StyledTableRow } from './StyledTable'
 const CoinsTable = () => {
     const [search, setSearch] = useState("")
     const [page, setPage] = useState(1)
-    const {currency,symbol, local, coins,loading} = CryptoState() //we can receive fetch coin here but no need
+    const {symbol, local, coins,loading} = CryptoState() //we can receive fetch coin here but no need
     const navigate = useNavigate()
 
     const handleSearch = () => {

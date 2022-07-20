@@ -36,7 +36,7 @@ const CoinPage = () => {
             setCoin(data)
         }
         fetchCoinDetail()
-    },[])
+    },[id])
     // console.log("coin :", coin, id)
     
     const addToWatchlist = async () => {
@@ -133,11 +133,11 @@ const CoinPage = () => {
                           {symbol}  {coin?.market_data.market_cap[currency.toLowerCase()].toLocaleString(local).slice(0, -7)}M
                         </Typography>
                     </span>
-                    <StyledButton variant="outlined" 
+              {user &&      <StyledButton variant="outlined" 
                                   onClick={inWatchlist? removeFromWatchList : addToWatchlist} 
                                   sx={{color: inWatchlist? "red": ""}}>
                       {inWatchlist ? "Remove from Watchlist" : "Add to Watchlist"}
-                    </StyledButton>
+                    </StyledButton>}
                 </MarketDataRoot>
             </SidebarRoot>
             <CoinInfo coin={coin} />

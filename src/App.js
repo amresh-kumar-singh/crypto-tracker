@@ -7,18 +7,12 @@ import {
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Header from "./Components/Header";
-// import CoinPage from './Pages/CoinPage';
-import HomePage from "./Pages/HomePage";
 import { lazy, Suspense, useMemo, useState } from "react";
 import { amber, grey } from "@mui/material/colors";
 import Alert from "./Components/Alert";
 const CoinPage = lazy(() => import("./Pages/CoinPage"));
+const HomePage = lazy(() => import("./Pages/HomePage"));
 
-const appStyle = {
-  // backgroundColor: "inherit",
-  // color: "white",
-  minHeight: "100vh",
-};
 const getDesignToken = (mode) => ({
   palette: {
     mode,
@@ -57,10 +51,17 @@ function App() {
   return (
     <Router>
       <ThemeProvider theme={themeMode}>
-        <Paper sx={appStyle}>
+        <Paper sx={{ minHeight: "100vh" }}>
           <Header setMode={setMode} />
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route
+              path="/"
+              element={
+                <Suspense fallback={<CircularProgress />}>
+                  <HomePage />
+                </Suspense>
+              }
+            />
             <Route
               path="/coins/:id"
               element={
